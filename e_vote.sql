@@ -1,0 +1,60 @@
+CREATE DATABASE IF NOT EXISTS `eVote` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `eVote`;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+-- Tabel `t_admin`
+CREATE TABLE `t_admin` (
+  `id_admin` TINYINT(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(35) NOT NULL,
+  `fullname` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id_admin`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabel `t_kandidat`
+CREATE TABLE `t_kandidat` (
+  `id_kandidat` SMALLINT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nama_calon` VARCHAR(50) NOT NULL,
+  `foto` VARCHAR(255) NOT NULL,
+  `visi` TEXT NOT NULL,
+  `misi` TEXT NOT NULL,
+  `suara` SMALLINT(4) UNSIGNED NOT NULL DEFAULT '0',
+  `periode` VARCHAR(9) NOT NULL,
+  PRIMARY KEY (`id_kandidat`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabel `t_kelas`
+CREATE TABLE `t_kelas` (
+  `id_kelas` VARCHAR(3) NOT NULL,
+  `nama_kelas` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`id_kelas`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabel `t_pemilih`
+CREATE TABLE `t_pemilih` (
+  `nis` VARCHAR(10) NOT NULL,
+  `periode` VARCHAR(9) NOT NULL,
+  PRIMARY KEY (`nis`, `periode`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabel `t_user`
+CREATE TABLE `t_user` (
+  `id_user` VARCHAR(10) NOT NULL,
+  `fullname` VARCHAR(50) NOT NULL,
+  `id_kelas` VARCHAR(3) NOT NULL,
+  `jk` ENUM('L','P') NOT NULL,
+  `pemilih` ENUM('Y','N') NOT NULL DEFAULT 'Y',
+  PRIMARY KEY (`id_user`),
+  FOREIGN KEY (`id_kelas`) REFERENCES `t_kelas`(`id_kelas`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
