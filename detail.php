@@ -11,27 +11,25 @@
 </head>
 
 <body>
-<canvas id="particleCanvas" class="absolute"></canvas>
-   <header class="w-full">
-      <nav class="bg-indigo-800 px-6 py-4 border-b-2 rounded-b-xl shadow-lg">
-         <h1 class="text-center px-3 py-3 bg-indigo-700 w-full sm:w-2/3 lg:w-1/3 mx-auto rounded-xl shadow-inner shadow-white text-white text-md sm:text-xl font-semibold uppercase tracking-wider">
-            Details <span class="text-orange-300">Candidate</span>
-         </h1>
+   <header class="w-full ">
+      <nav class="bg-[#e8dac0]/70 py-3 px-6 w-full rounded-b-xl shadow-md shadow-white sm:justify-center flex flex-row justify-between items-center gap-4">
+         <h1 class="text-center uppercase tracking-wide space-y-2 z-10 text-sm font-extrabold text-white bg-red-600 px-2 py-3 rounded-xl sm:w-1/4 w-full ">Details Paslon</h1>
+         <img src="assets/img/golput.png" class="z-10 sm:w-14 w-20 sm:hidden block" alt="">
+
       </nav>
    </header>
 
-   <div class="max-w-7xl mx-auto mt-10 px-4">
+   <?php include 'components/batik_background.php' ?>
+   <div class="w-full mx-auto m-4 px-4">
       <?php
       define('BASEPATH', dirname(__FILE__));
       session_start();
-
       if (!isset($_SESSION['siswa'])) {
          header('location:./');
       }
 
       if (isset($_GET['id'])) {
          require('./include/connection.php');
-
          $sql = $con->prepare("SELECT * FROM t_kandidat WHERE id_kandidat = ?") or die($con->error);
          $sql->bind_param('i', $_GET['id']);
          $sql->execute();
@@ -39,49 +37,48 @@
          $sql->bind_result($id, $nama, $foto, $visi, $misi, $suara, $periode);
          $sql->fetch();
       ?>
-         <div class="bg-white/10 backdrop-blur-sm border border-white/10 shadow-xl rounded-xl p-6">
+         <div class="bg-white/40 border border-white/10 shadow-md rounded-xl p-6 shadow-black relative">
             <div class="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
-               <img src="./assets/img/kandidat/<?php echo $foto; ?>" class="w-40 sm:w-80 md:w-96 object-cover aspect-square rounded-xl">
+               <img src="./assets/img/kandidat/<?php echo $foto; ?>" class="w-40 sm:w-80 md:w-96 object-contain rounded-md border-2 border-black">
                <div class="w-full">
-                  <h3 class="text-white text-lg sm:text-3xl mb-1 sm:mb-6">Details Information</h3>
-                  <table class="table-auto w-full text-xs md:text-base text-left text-gray-200 border-collapse border-spacing-0">
+                  <h3 class="text-gray-600 tracking-wide font-semibold text-lg sm:text-3xl mb-1 sm:mb-6">Informasi Detail Paslon</h3>
+                  <table class="table-auto w-full text-xs md:text-base text-left text-white font-semibold border-collapse border-spacing-0">
                      <tbody>
                         <tr class="border-b border-gray-700">
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-gray-100/40">Nama Calon</td>
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 bg-gray-100/10"><?php echo $nama; ?></td>
+                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-red-600 text-center">Nama Paslon</td>
+                           <td class="py-1 px-2 sm:py-3 sm:px-4 text-black bg-[#e9dabf]"><?php echo $nama; ?></td>
                         </tr>
                         <tr class="border-b border-gray-700">
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-gray-100/40">Visi</td>
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 bg-gray-100/10"><?php echo nl2br($visi); ?></td>
+                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-red-600 text-center">Visi</td>
+                           <td class="py-1 px-2 sm:py-3 sm:px-4 text-black bg-[#e9dabf]"><?php echo nl2br($visi); ?></td>
                         </tr>
                         <tr class="border-b border-gray-700">
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-gray-100/40">Misi</td>
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 bg-gray-100/10"><?php echo nl2br($misi); ?></td>
-                        </tr>
-                        <tr class="border-b border-gray-700">
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-gray-100/40">Total Perolehan Suara</td>
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 bg-gray-100/10"><?php echo $suara; ?> Suara</td>
-                        </tr>
-                        <tr>
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-gray-100/40">Periode Pencalonan</td>
-                           <td class="py-1 px-2 sm:py-3 sm:px-4 bg-gray-100/10"><?php echo $periode; ?></td>
+                           <td class="py-1 px-2 sm:py-3 sm:px-4 font-medium bg-red-600 text-center">Misi</td>
+                           <td class="py-1 px-2 sm:py-3 sm:px-4 text-black bg-[#e9dabf]"><?php echo nl2br($misi); ?></td>
                         </tr>
                      </tbody>
                   </table>
 
-                  <div class="flex flex-col sm:flex-row gap-4 mt-2 sm:mt-8 text-center">
-                     <button onclick="window.history.go(-1)" class="py-1 px-2 sm:py-3 sm:px-4 w-full rounded-xl hover:[box-shadow:0_0_4px_2px_#fff] duration-300 bg-indigo-700 text-white">Back</button>
-                     <a href="./submit.php?id=<?php echo $id; ?>&s=<?php echo $suara; ?>" class="py-1 px-2 sm:py-3 sm:px-4 w-full rounded-xl hover:[box-shadow:0_0_4px_2px_#fff] duration-300 bg-orange-400 text-white">Vote</a>
+                  <div class="flex flex-col sm:flex-row mt-2 sm:mt-8 gap-1 sm:gap-2 w-full">
+                     <button onclick="backHome()" class="mt-6 text-center w-full px-3 py-2 text-white bg-red-600 rounded-xl -translate-y-[10px] [box-shadow:0_10px_0_#c3ae95] active:[box-shadow:0_5px_0_#c3ae95] active:-translate-y-[5px] relative z-10">Kembali</button>
+                     <button href="javascript:void(0);" onclick="confirmVote(<?php echo $id; ?>, <?php echo $suara; ?>);" class="mt-6 text-center w-full px-3 py-2 text-white bg-red-600 rounded-xl -translate-y-[10px] [box-shadow:0_10px_0_#c3ae95] active:[box-shadow:0_5px_0_#c3ae95] active:-translate-y-[5px] relative z-10">Vote</button>
                   </div>
+                  <img src="assets/img/golput.png" class="z-10 w-44 fixed bottom-6 right-10 sm:block hidden" alt="">
                </div>
             </div>
          </div>
       <?php
       } else {
          header('location: ./');
-      }
+      }2
       ?>
    </div>
+   <?php include 'footer.php' ?>
+   <script>
+      function backHome() {
+         window.location.href = 'vote.php';
+      }
+   </script>
 
    <script src="assets/js/pages/particlesBg.js"></script>
 </body>

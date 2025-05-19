@@ -20,9 +20,9 @@ $sql->fetch();
         <form action="./user/update.php" method="post" class="form-horizontal">
       
             <div class="form-group">
-                <label class="col-sm-2 control-label">NIS</label>
+                <label class="col-sm-2 control-label">Token</label>
                 <div class="col-md-4">
-                    <input class="form-control" type="number" name="nis" placeholder="NIS" type="number" readonly value="<?php echo $id_user; ?>"/>
+                    <input class="form-control" type="text" name="nis" placeholder="<?php echo $id_user; ?>" type="text" readonly value="<?php echo $id_user; ?>"/>
                 </div>
             </div>
             

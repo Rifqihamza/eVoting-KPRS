@@ -9,7 +9,6 @@ if (!isset($_SESSION['id_admin'])) {
       <h3 class="text-4xl font-semibold uppercase">Daftar Kandidat</h3>
       <div id="btn" class="flex gap-4">
          <a class="btn btn-primary" href="?page=kandidat&action=tambah">Tambah Kandidat</a>
-         <!-- <a class="btn btn-primary" href="">Reset Vote</a> -->
 
          <select id="periode" class="form-control">
             <option value="">-- Pilih Periode--</option>

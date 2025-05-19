@@ -6,19 +6,19 @@ if (!isset($_SESSION['siswa'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>E - Voting | SMK Mitra Industri MM2100</title>
+   <title>E-Voting | SMK Mitra Industri MM2100</title>
    <link rel="icon" href="https://smkind-mm2100.sch.id/wp-content/uploads/2022/10/MM2100-LOGO-SMK-Mitra-Industri-MM2100-PNG.png">
-   <link rel="stylesheet" href="assets/css/style.css">
    <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
-   <canvas id="particleCanvas" class="absolute"></canvas>
+<body class="bg-gray-100">
+   <?php include 'components/batik_background.php'; ?>
 
    <?php
    require('./include/connection.php');
@@ -35,68 +35,70 @@ if (!isset($_SESSION['siswa'])) {
    if ($sql->num_rows() > 0) {
       $numb = $sql->num_rows();
       echo '
-  <header class="w-full sticky-top z-50">
-   <nav class="bg-indigo-800 px-6 py-4 border-b-2 rounded-b-xl [box-shadow:0_0_4px_2px_#fff]">
-      <ul class="flex flex-row gap-3 items-center">
-         <!-- Elemen pertama -->
-         <li class="flex-1 sm:flex-none">
-            <h1 class="bg-indigo-700 p-3 rounded-lg text-white font-bold text-center shadow-inner shadow-white text-xs sm:text-lg w-[13em] sm:w-full">
-               <span class="">KOMISI PEMILIHAN</span>
-               <span class=" text-orange-300">RAYA SEKOLAH</span>
-            </h1>
-         </li>
-         <!-- Elemen kedua -->
-         <li class="flex-1 sm:flex-none">
-         <h2 class="text-sm text-white font-semibold">Kandidat Ketua & Wakil Ketua OSIS Periode <span class="text-sm text-orange-300">' . $periode . '</span></h2>
-         </li>
-      </ul>
-   </nav>
-</header>
+        <header class="w-full fixed top-0 z-50">
+            <nav class="sm:py-4 sm:px-4 py-2 px-2 w-full bg-[#e8dac0]/70 rounded-b-xl shadow-md flex justify-between">
+                <ul class="flex sm:flex-row flex-col gap-2 items-center">
+                    <li>
+                        <h1 class="text-center uppercase tracking-wide sm:text-sm text-xs font-extrabold text-white bg-red-600 sm:px-6 sm:py-4 px-5 py-3 rounded-xl">
+                            Komisi Pemilihan Raya Sekolah
+                        </h1>
+                    </li>
+                    <li class="flex-1 sm:flex-none">
+                        <h2 class="sm:text-sm text-xs font-semibold uppercase">
+                            Paslon Ketua & Wakil Ketua OSIS <br> Periode 
+                            <span class="text-sm text-red-600">' . $periode . '</span>
+                        </h2>
+                    </li>
+                </ul>
+                <img src="assets/img/golput.png" class="object-contain sm:w-16 w-20 sm:hidden block">
+                <img src="https://smkind-mm2100.sch.id/wp-content/uploads/2022/10/MM2100-LOGO-SMK-Mitra-Industri-MM2100-PNG.png" class="w-12 h-12 mr-4 ring-2 ring-red-800 rounded-full sm:block hidden">
+            </nav>
+        </header>
+        ';
 
-';
-      echo '<div class="flex flex-wrap items-center justify-center mx-auto flex-row mt-3 sm:mt-10 gap-4">';  // Added max-h-screen for scrolling
+      echo '<div class="min-h-screen pb-24 pt-28 flex flex-col items-center">';
+
+      include 'components/awan_element.php';
+
+      echo '<div class="flex flex-col sm:flex-row max-w-4xl mx-auto items-center justify-center gap-10 z-10">';
 
       for ($i = 1; $i <= $numb; $i++) {
          $sql->bind_result($id, $nama, $foto, $visi, $misi, $suara, $periode);
          $sql->fetch();
    ?>
-
-         <section data-wow-delay="<?php echo $i; ?>" class="mx-auto w-44 sm:w-[280px]">
-            <div class="p-4 bg-indigo-800/30 backdrop-blur-md border border-gray-600 [box-shadow:0_0_4px_2px_#fff] rounded-lg flex flex-col items-center">
-               <img src="./assets/img/kandidat/<?php echo $foto; ?>" class="w-38 h-38 sm:w-48 sm:h-48 lg:w-72 lg:h-72 object-cover rounded-xl shadow-lg">
-               <div id="title" class="text-white font-semibold mt-6 text-center">
-                  <p class="text-sm lg:text-xl"><?php echo $nama; ?></p>
-                  <div id="pilihBtn" class="flex justify-center gap-4 mt-4 text-md">
-                     <a href="./detail.php?id=<?php echo $id; ?>" class="relative group">
-                        Details
-                        <span class="absolute rounded-full left-1/2 top-full h-1 w-0 bg-orange-300 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-                     </a>
-                     <span class="inline-block w-[1px] bg-gray-200"></span>
-                     <a href="./submit.php?id=<?php echo $id; ?>&s=<?php echo $suara; ?>" class="relative group">
-                        Vote
-                        <span class="absolute rounded-full left-1/2 top-full h-1 w-0 bg-orange-300 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
-                     </a>
-                  </div>
-               </div>
-            </div>
+         <img src="assets/img/golput.png" class="sm:w-44 w-24 fixed right-[8rem] top-[5rem] sm:block hidden -z-40" alt="">
+         <section class="flex flex-col items-center justify-center bg-[#d1a187] backdrop-blur rounded-xl px-4 py-5 hover:scale-105 transition duration-300 gap-4">
+            <img src="assets/img/batik_background.jpg" class="absolute top-0 left-0 right-0 w-full h-full -z-10 p-1 rounded-xl object-cover">
+            <a href="javascript:void(0);" onclick="confirmVote(<?php echo $id; ?>, '<?php echo $suara; ?>');" class="sm:w-[20rem] w-[15rem]">
+               <img src="./assets/img/kandidat/<?php echo $foto; ?>" class="sm:w-[300px] w-[200px] mx-auto rounded-md border-2 border-black">
+            </a>
+            <a href="detail.php?id=<?php echo $id; ?>" class="mb-3 text-center uppercase tracking-wider font-bold sm:w-[16rem] w-[12rem] px-3 py-2 text-white bg-[#d93022] rounded-xl shadow-[0_10px_0_#fff] active:shadow-[0_5px_0_#fff] active:translate-y-1 relative z-10">
+               Details
+            </a>
          </section>
    <?php
       }
       echo '</div>';
       echo '</div>';
    } else {
-      echo '<div class="text-center mt-20 text-white">
-               <h2 class="text-2xl font-semibold">Belum Ada Calon Ketua</h2>
-               <a href="logout.php" class="text-orange-300 hover:text-orange-500 transition">Kembali</a>
-            </div>';
+      echo '<div class="text-center mt-20 text-gray-800">
+                  <h2 class="text-2xl font-semibold">Belum Ada Calon Ketua</h2>
+                  <a href="logout.php" class="text-red-500 hover:text-red-700 transition">Kembali</a>
+              </div>';
    }
    ?>
 
-   <footer>
-      <img src="assets/img/wavegroup2.svg" class="rotate-180 absolute w-[150vw] h-auto bottom-0 right-0 left-0">
-   </footer>
+
+   <!-- Rotated Image -->
+   <div class="fixed sm:-bottom-[2rem] sm:-left-[3rem] -bottom-[1rem] -left-[2rem] rotate-12">
+      <img src="assets/img/kotak_element.png" class="boxPilih sm:w-1/2 w-[10rem]" alt="Rotated Vector">
+   </div>
+   <div class="fixed sm:-bottom-[2rem] sm:-right-[15rem] -bottom-[2rem] -right-[20rem] -rotate-12">
+      <img src="assets/img/kertas_element.png" class="kertasPilih sm:w-2/3 w-1/2" alt="">
+   </div>
+   <?php include 'footer.php' ?>
    <script src="./assets/js/jquery.js"></script>
-   <script src="assets/js/pages/particlesBg.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <script>
       function logoutBtn() {
          window.location.href = "logout.php";

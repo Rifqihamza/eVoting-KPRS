@@ -2,3 +2,7 @@
     Order deny,allow
     Deny from all
 </Files>
+
+# Nonaktifkan cache PHP
+php_flag opcache.enable Off
+php_flag opcache.enable_cli Off

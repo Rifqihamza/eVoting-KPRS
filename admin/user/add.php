@@ -42,9 +42,9 @@ if (isset($_POST['add_user'])) {
         <form action="" method="post" class="form-horizontal">
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">NIS</label>
+                <label class="col-sm-2 control-label">Token</label>
                 <div class="col-md-4">
-                    <input class="form-control" type="number" name="nis" placeholder="NIS" type="number" />
+                    <input class="form-control" type="text" name="nis" placeholder="Token" type="text" />
                 </div>
             </div>
 

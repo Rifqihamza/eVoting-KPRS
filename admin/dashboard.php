@@ -31,8 +31,9 @@ include('../include/connection.php');
     }
 
     img.kandidat {
-      width: 250px;
-      height: 230px;
+      width: 300px;
+      height: 250px;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -44,7 +45,7 @@ include('../include/connection.php');
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <a href="#" class="sidebar-toggle [font-size:24px]" data-toggle="offcanvas" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
         <!-- Navbar Right Menu -->
@@ -214,6 +215,7 @@ include('../include/connection.php');
     <script type="text/javascript" src="../assets/js/utils.js"></script>
     <script type="text/javascript" src="../assets/js/FileSaver.min.js"></script>
     <script type="text/javascript" src="../assets/js/canvas-toBlob.js"></script>
+    <!-- <script type="text/javascript" src="../assets/js/canvasWithCsv.js"></script> -->
   <?php } ?>
   <script type="text/javascript">
     // slideToggle()

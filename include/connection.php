@@ -1,17 +1,9 @@
 <?php
-// Prevent direct access to this file
-// defined('BASEPATH') or header("Direct Access Not Allowed");
-// if (!defined('BASEPATH')) {
-//     header('Location: errorAlert.html');
-//     exit();
-// }
-
-
 // Database connection parameters
 $host = 'localhost';
-$user = 'AdminKPRS2025';
-$pass = '@MitraKPRS2025';
-$db   = 'evote';
+$user = 'root';
+$pass = '';
+$db   = 'db_evoting';
 
 // Create a new MySQLi connection
 $con  = new mysqli($host, $user, $pass, $db);
